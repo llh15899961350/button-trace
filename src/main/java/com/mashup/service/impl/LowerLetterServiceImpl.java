@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LowerLetterServiceImpl implements ILowerLetterService {
 
-    // private static final char DEFAULT_LETTER = 'a';
+    private static final char DEFAULT_LETTER = 'a';
 
     private static final Map<Integer, LowerLetterDO> CACHE_MAP = Maps.newConcurrentMap();
 
@@ -28,8 +28,9 @@ public class LowerLetterServiceImpl implements ILowerLetterService {
         String temp = String.valueOf(digit);
         List<String> actualList = null;
         LowerLetterDO letter = null;
-
         int[] arr;
+        String letterValue = null;
+
         if (temp.length() < 2) {
 
             arr = new int[] {digit};
@@ -43,19 +44,34 @@ public class LowerLetterServiceImpl implements ILowerLetterService {
         }
 
         actualList = buttonService.output(arr);
+        letter = CACHE_MAP.get(digit);
 
-        if (actualList.isEmpty() && Objects.isNull(CACHE_MAP.get(digit))) {
+        if (actualList.isEmpty() && Objects.isNull(letter)) {
             synchronized (this) {
-                // CACHE_MAP.put(digit, value);
+                letter = new LowerLetterDO();
+
+                if (CACHE_MAP.isEmpty()) {
+                    letter.setValue(String.valueOf(DEFAULT_LETTER));
+                    CACHE_MAP.put(digit, letter);
+
+                } else {
+                    int size = CACHE_MAP.size();
+
+
+                }
             }
 
-        } else {
-            String letterValue = actualList.stream().collect(Collectors.joining());
+        } else if (Objects.isNull(letter)) {
+            letterValue = actualList.stream().collect(Collectors.joining());
             letter = new LowerLetterDO();
             letter.setValue(letterValue);
         }
 
         return letter;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(2 % 26);
     }
 
     /**

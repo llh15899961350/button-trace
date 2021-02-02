@@ -16,7 +16,7 @@ Button-Trace in flavors:
 ## Start Help
 
 -	Run Method:
-		Application.java
+		ButtonServiceTest.java
 
 
 

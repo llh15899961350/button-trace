@@ -58,7 +58,7 @@ class ButtonServiceTest {
     }
 
     @Test
-    void demo() throws Exception {
+    void testDoQueryWith() throws Exception {
         List<String> actualLines = null;
         List<String> numbers = Lists.newArrayList();
         Set<String> values = Sets.newHashSet();
@@ -91,6 +91,15 @@ class ButtonServiceTest {
 
         log.info(numbers.size() + "");
 
+    }
+
+    /**
+     * Question 2
+     */
+    @Test
+    void testDoQuestionTwo() throws Exception {
+        // todo: no any idea to support this question
+        log.info("to be continue!");
     }
 
 
